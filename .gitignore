@@ -1,0 +1,6 @@
+# directory
+build
+bin
+logs
+# file
+imgui.ini
