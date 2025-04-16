@@ -17,6 +17,10 @@ A C++ application using ImGui, GLFW, and spdlog to implement a UI interface with
 - [OpenGL](https://www.opengl.org/)
 - [spdlog](https://github.com/gabime/spdlog)
 - [ImGui](https://github.com/ocornut/imgui)
+- [RapidJSON](https://github.com/Tencent/rapidjson) (`inlcude/rapidjson`)
+- [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)
+- [Winky Rough](https://fonts.google.com/specimen/Winky+Rough) (English fonts)
+- [Kosugi Maru](https://fonts.google.com/specimen/Kosugi+Maru) (Chinese fonts)
 - [vcpkg](https://github.com/microsoft/vcpkg) (dependency manager).
 
 ## Prerequisites
@@ -42,7 +46,7 @@ Install vpckg to manage dependencies:
 vcpkg install glfw3 
 vpckg install opengl
 vcpkg install spdlog
-vpckg install imgui[docking-experimental,opengl3-binding,glfw-binding]
+vpckg install imgui[docking-experimental,opengl3-binding,glfw-binding,freetype-svg]
 ```
 
 ## Build Instructions
@@ -64,7 +68,7 @@ vpckg install imgui[docking-experimental,opengl3-binding,glfw-binding]
 
     ```bash
     cd ..
-    ./bin/Debug/ui_project
+    .\bin\Debug\ui_project
     ```
 
 ### Linux
@@ -121,6 +125,8 @@ vpckg install imgui[docking-experimental,opengl3-binding,glfw-binding]
 - MVC pattern for UI (UserModel, UserView).
 - Application pattern for lifecycle management.
 - LoggerFacade with spdlog for console and file logging.
+- Theme Switching: Supports Dark, Light, and Classic themes, saved to config/theme.json using RapidJSON.
+- File Manager: Displays and manages files/directories with filtering, supports image loading, using Emoji icons (📁, 📄).
 - Smart pointers for memory safety.
 
 ## Log Output

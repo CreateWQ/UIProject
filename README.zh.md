@@ -17,6 +17,10 @@
 - [OpenGL](https://www.opengl.org/)
 - [spdlog](https://github.com/gabime/spdlog)
 - [ImGui](https://github.com/ocornut/imgui)（以原始碼形式包含在 `include/imgui` 中）
+- [RapidJSON](https://github.com/Tencent/rapidjson) (`inlcude/rapidjson`)
+- [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)(Emoji 圖標📁、📄)
+- [Winky Rough](https://fonts.google.com/specimen/Winky+Rough) (英文字型)
+- [Kosugi Maru](https://fonts.google.com/specimen/Kosugi+Maru) (中文字型)
 - [vcpkg](https://github.com/microsoft/vcpkg)（依賴管理工具）
 
 ### 前置條件
@@ -114,9 +118,11 @@ vpckg install imgui[docking-experimental,opengl3-binding,glfw-binding]
 
 ## 功能
 
-- MVC 模式實現 UI（UserModel、UserView）。
-- Application 模式管理應用生命週期。
-- LoggerFacade 搭配 spdlog 實現控制台和檔案日誌。
+- MVC 模式: 實現 UI（UserModel、UserView）。
+- Application 模式: 管理應用生命週期。
+- LoggerFacade: 搭配 spdlog 實現控制台和檔案日誌。
+- 主題切換：支援深色、淺色和經典主題，使用 RapidJSON 儲存至 config/theme.json。
+- 檔案管理器：顯示和管理檔案/資料夾，支援過濾和圖片載入，使用 Emoji 圖標（📁、📄）。
 - 使用智能指標確保記憶體安全。
 
 ## 日誌輸出

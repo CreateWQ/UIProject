@@ -10,7 +10,9 @@ public:
 
     static std::unique_ptr<UserView> createUserView(
         std::shared_ptr<UserModel> model,
-        std::shared_ptr<LoggerFacade> logger
+        std::shared_ptr<FileManager> file,
+        std::shared_ptr<ThemeManager> theme,
+        std::shared_ptr<LoggerFacade> log
     );
 
 };

@@ -1,8 +1,10 @@
+
 #include "application.hpp"
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+
 
 Application::Application() {
     logger = std::make_shared<LoggerFacade>();
@@ -15,9 +17,10 @@ Application::Application() {
         logger->error("Renderer initialization failed: {}", e.what());
         throw;
     }
-
+    file_manager = std::make_shared<FileManager>(logger);
+    theme_manager = std::make_shared<ThemeManager>(logger);
     model = std::make_shared<UserModel>("Alice", logger);
-    view = UIFactory::createUserView(model, logger);
+    view = UIFactory::createUserView(model, file_manager, theme_manager, logger);
 }
 
 void Application::run() {
