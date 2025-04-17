@@ -10,11 +10,22 @@
 #include <rapidjson/filewritestream.h>
 #include <fstream>
 #include <stdexcept>
+#include <filesystem>
 
-ThemeManager::ThemeManager(std::shared_ptr<LoggerFacade> log, const std::string& path)
-    : current_theme(Theme::Dark), logger(log), config_path(path) {
+ThemeManager::ThemeManager(std::shared_ptr<LoggerFacade> log, const std::filesystem::path& path)
+    : current_theme(Theme::Dark), logger(log), config_path(path.string()) {
 
     try {
+        if (!std::filesystem::exists(path.parent_path())) {
+            std::filesystem::create_directories(path.parent_path());
+            if (logger) logger->info("Create directory {}", path.parent_path().string());
+        }
+
+        if (!std::filesystem::exists(config_path)) {
+            std::ofstream out_file(config_path);
+            out_file.close();
+        }
+
         FILE* fp = fopen(config_path.c_str(), "rb");
         if (fp) {
             char readBuffer[65536];

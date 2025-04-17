@@ -4,6 +4,7 @@
 #include "logger/logger_facade.hpp"
 #include <string>
 #include <memory>
+#include <filesystem>
 
 class ThemeManager {
 public:
@@ -22,7 +23,7 @@ private:
 
 public:
 
-    ThemeManager(std::shared_ptr<LoggerFacade> log, const std::string& path = "config/theme.json");
+    ThemeManager(std::shared_ptr<LoggerFacade> log, const std::filesystem::path& path = "config/theme.json");
 
     void applyTheme(Theme theme);
     void saveTheme();

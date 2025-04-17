@@ -63,3 +63,20 @@ bool FileManager::isImageFile(const std::filesystem::path& path) const {
 
 }
 
+bool FileManager::existPath(const std::filesystem::path& path) const {
+
+    return std::filesystem::exists(path);
+
+}
+
+void FileManager::createDirectory(const std::filesystem::path& path) const {
+
+    try {
+        std::filesystem::create_directory(path);
+        if (logger) logger->info("Create directory: {}", path.string());
+    } catch (const std::exception& e) {
+        if (logger) logger->error("Failed to create directory: {}", e.what());
+    }
+
+}
+

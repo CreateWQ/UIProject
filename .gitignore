@@ -2,6 +2,6 @@
 .vscode
 build
 bin
-logs
+
 # file
 imgui.ini

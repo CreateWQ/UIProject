@@ -4,12 +4,17 @@
 
 ---
 
-A C++ application using ImGui, GLFW, and spdlog to implement a UI interface with MVC, Application, and Logger patterns.
+## Overview
+
+> A C++ application using ImGui, GLFW, spdlog, RapidJSON, and OpenCV to implement a UI interface with MVC, Application, and Logger patterns. Features include theme switching, a log window, a file manager, and image processing (grayscale conversion).
 
 ## Folder Structure
 
 - **src/**: Source code, organized by module(application, model, view, renderer, logger, factory).
+- **include/**: External library headers (rapidjson).
 - **logs/**: Log output directory for spdlog.
+- **config/**: Configuration files (e.g., theme.json).
+- **output/**: Output directory for processed images (e.g., grayscale images).
 
 ## Dependencies
 
@@ -17,6 +22,7 @@ A C++ application using ImGui, GLFW, and spdlog to implement a UI interface with
 - [OpenGL](https://www.opengl.org/)
 - [spdlog](https://github.com/gabime/spdlog)
 - [ImGui](https://github.com/ocornut/imgui)
+- [OpenCV](https://opencv.org/) (version 4.x)
 - [RapidJSON](https://github.com/Tencent/rapidjson) (`inlcude/rapidjson`)
 - [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)
 - [Winky Rough](https://fonts.google.com/specimen/Winky+Rough) (English fonts)
@@ -127,6 +133,7 @@ vpckg install imgui[docking-experimental,opengl3-binding,glfw-binding,freetype-s
 - LoggerFacade with spdlog for console and file logging.
 - Theme Switching: Supports Dark, Light, and Classic themes, saved to config/theme.json using RapidJSON.
 - File Manager: Displays and manages files/directories with filtering, supports image loading, using Emoji icons (📁, 📄).
+- Image Processing: Loads images, converts to grayscale, displays in UI, and saves grayscale images to output/ using OpenCV.
 - Smart pointers for memory safety.
 
 ## Log Output

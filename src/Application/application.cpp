@@ -17,10 +17,12 @@ Application::Application() {
         logger->error("Renderer initialization failed: {}", e.what());
         throw;
     }
+    
     file_manager = std::make_shared<FileManager>(logger);
     theme_manager = std::make_shared<ThemeManager>(logger);
+    image_processor = std::make_shared<ImageProcessor>(logger);
     model = std::make_shared<UserModel>("Alice", logger);
-    view = UIFactory::createUserView(model, file_manager, theme_manager, logger);
+    view = UIFactory::createUserView(model, file_manager, theme_manager, image_processor, logger);
 }
 
 void Application::run() {

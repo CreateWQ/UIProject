@@ -33,26 +33,31 @@ set(ZLIB_INCLUDE_DIR "C:/src/vcpkg/packages/zlib_x64-windows/include")
 set(plutovg_DIR "C:/src/vcpkg/packages/plutovg_x64-windows/share/plutovg")
 set(plutosvg_DIR "C:/src/vcpkg/packages/plutosvg_x64-windows/share/plutosvg")
 
+set(OpenCV_DIR "C:/opencv/opencv/build")
 
-# find_package(lunasvg CONFIG REQUIRED)
-# find_package(freetype CONFIG REQUIRED)
+find_package(OpenCV REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
 include_directories(${RapidJSON_DIR})
-# target_include_directories(${PROJECT_NAME} PUBLIC ${RapidJSON_DIR})
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC 
     imgui::imgui 
     glfw
     spdlog::spdlog_header_only
-    # lunasvg
-    # Freetype::Freetype
+    ${OpenCV_LIBS}
 )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "C:/src/vcpkg/packages/freetype_x64-windows/bin/freetype.dll"
             "${CMAKE_SOURCE_DIR}/bin/Debug/freetyped.dll"
+)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "C:/opencv/opencv/build/x64/vc16/bin/opencv_world4100d.dll"
+            "${CMAKE_SOURCE_DIR}/bin/Debug/opencv_world4100d.dll"
 )

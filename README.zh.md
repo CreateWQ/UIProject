@@ -4,23 +4,27 @@
 
 ## 概述
 
-這是一個使用 ImGui、GLFW 和 spdlog 實現的 C++ 應用程式，採用 MVC、Application 和 Logger 設計模式來構建 UI 介面。
+> 這是一個使用 ImGui、GLFW、spdlog、RapidJSON 和 OpenCV 實現的 C++ 應用程式，採用 MVC、Application 和 Logger 設計模式構建 UI 介面。功能包括主題切換、日誌視窗、檔案管理器和圖片處理（灰階轉換）。
 
 ## 資料夾結構
 
 - **src/**：原始碼，按模組組織（application、model、view、renderer、logger、factory）。
+- **include/**：外部庫頭文件（rapidjson）。
 - **logs/**：spdlog 的日誌輸出目錄。
+- **config/**：配置文件（例如 theme.json）。
+- **output/**：處理後圖片的輸出目錄（例如灰階圖片）。
 
 ## 依賴
 
 - [GLFW](https://www.glfw.org/)
 - [OpenGL](https://www.opengl.org/)
 - [spdlog](https://github.com/gabime/spdlog)
-- [ImGui](https://github.com/ocornut/imgui)（以原始碼形式包含在 `include/imgui` 中）
+- [ImGui](https://github.com/ocornut/imgui)
+- [OpenCV](https://opencv.org/) (版本 4.x)
 - [RapidJSON](https://github.com/Tencent/rapidjson) (`inlcude/rapidjson`)
 - [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)(Emoji 圖標📁、📄)
-- [Winky Rough](https://fonts.google.com/specimen/Winky+Rough) (英文字型)
-- [Kosugi Maru](https://fonts.google.com/specimen/Kosugi+Maru) (中文字型)
+- [Winky Rough](https://fonts.google.com/specimen/Winky+Rough) ( 英文字型 )
+- [Kosugi Maru](https://fonts.google.com/specimen/Kosugi+Maru) ( 中文字型 )
 - [vcpkg](https://github.com/microsoft/vcpkg)（依賴管理工具）
 
 ### 前置條件
@@ -123,6 +127,7 @@ vpckg install imgui[docking-experimental,opengl3-binding,glfw-binding]
 - LoggerFacade: 搭配 spdlog 實現控制台和檔案日誌。
 - 主題切換：支援深色、淺色和經典主題，使用 RapidJSON 儲存至 config/theme.json。
 - 檔案管理器：顯示和管理檔案/資料夾，支援過濾和圖片載入，使用 Emoji 圖標（📁、📄）。
+- 圖片處理：載入圖片，轉換為灰階，在 UI 中顯示，並使用 OpenCV 將灰階圖片儲存至 output/。
 - 使用智能指標確保記憶體安全。
 
 ## 日誌輸出

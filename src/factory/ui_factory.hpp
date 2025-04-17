@@ -12,6 +12,7 @@ public:
         std::shared_ptr<UserModel> model,
         std::shared_ptr<FileManager> file,
         std::shared_ptr<ThemeManager> theme,
+        std::shared_ptr<ImageProcessor> image,
         std::shared_ptr<LoggerFacade> log
     );
 
