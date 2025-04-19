@@ -7,8 +7,9 @@
 #include <stdexcept>
 
 void RendererFacade::initGLFW() {
-    if (!glfwInit()) throw std::runtime_error("Failed to initialize GLFW");
-
+    if (!glfwInit()) {
+        throw std::runtime_error("Failed to initialize GLFW");
+    }
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -20,6 +21,7 @@ void RendererFacade::initGLFW() {
     }
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
+
 }
 
 void RendererFacade::initImGui() {
@@ -28,8 +30,9 @@ void RendererFacade::initImGui() {
     ImGui::StyleColorsDark();
 
     ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-    ImFont* front_regular = io.Fonts->AddFontFromFileTTF("fonts/WinkyRough-Italic-VariableFont_wght.ttf", 25.0f, nullptr, io.Fonts->GetGlyphRangesDefault());
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad | ImGuiConfigFlags_DockingEnable;
+
+    io.Fonts->AddFontFromFileTTF("fonts/WinkyRough-Italic-VariableFont_wght.ttf", 25.0f, nullptr, io.Fonts->GetGlyphRangesDefault());
     
     static ImFontConfig config;
     config.MergeMode = true;
@@ -49,13 +52,21 @@ void RendererFacade::initImGui() {
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
+
+    // if (logger) logger->info("Initialized to ImGui");
 }
 
-RendererFacade::RendererFacade() 
-    : window(nullptr), initialized(false) {
-    initGLFW();
-    initImGui();
-    initialized = true;
+RendererFacade::RendererFacade(std::shared_ptr<LoggerFacade> log) 
+    : logger(log), window(nullptr), initialized(false) {
+    try {
+        initGLFW();
+        initImGui();
+        initialized = true;
+        if (logger) logger->info("Construct RendererFacade");
+    } catch (const std::exception& e) {
+        logger->error("Renderer initialization failed: {}", e.what());
+    }
+
 }
 
 RendererFacade::~RendererFacade() {
@@ -83,7 +94,7 @@ void RendererFacade::endFrame() {
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    glClearColor(0.45f, 0.45f, 0.45f, 1.00f);
+    glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);

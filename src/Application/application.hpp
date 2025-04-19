@@ -17,11 +17,12 @@ private:
     std::shared_ptr<ThemeManager> theme_manager;
     std::shared_ptr<UserModel> model;
     std::unique_ptr<UserView> view;
-
+    
 public:
 
     Application();
 
     void run();
+
 
 };

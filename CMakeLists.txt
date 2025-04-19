@@ -58,6 +58,6 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "C:/opencv/opencv/build/x64/vc16/bin/opencv_world4100d.dll"
+            "C:/opencv/opencv/build/x64/vc16/bin/opencv_world4100d.dll" # chage to your directory
             "${CMAKE_SOURCE_DIR}/bin/Debug/opencv_world4100d.dll"
 )

@@ -10,25 +10,20 @@ Application::Application() {
     logger = std::make_shared<LoggerFacade>();
     logger->info("Application starting");
 
-    try {
-        renderer = std::make_unique<RendererFacade>();
-        logger->info("Renderer initialized");
-    } catch (const std::exception& e) {
-        logger->error("Renderer initialization failed: {}", e.what());
-        throw;
-    }
+    renderer = std::make_unique<RendererFacade>(logger);
     
-    file_manager = std::make_shared<FileManager>(logger);
     theme_manager = std::make_shared<ThemeManager>(logger);
     image_processor = std::make_shared<ImageProcessor>(logger);
+    file_manager = std::make_shared<FileManager>(logger, image_processor);
     model = std::make_shared<UserModel>("Alice", logger);
     view = UIFactory::createUserView(model, file_manager, theme_manager, image_processor, logger);
 }
 
 void Application::run() {
     logger->info("Application running");
+    
     GLFWwindow* window = renderer->getWindow();
-
+    
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         renderer->beginFrame();

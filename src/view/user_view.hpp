@@ -23,6 +23,10 @@ class UserView : public Observer, public std::enable_shared_from_this<UserView> 
 
         int selected_theme;
         int selected_log_level;
+        int selected_strategy;
+
+        float processing_params[3];
+
         std::string execute_path;
     public:
     
@@ -33,7 +37,7 @@ class UserView : public Observer, public std::enable_shared_from_this<UserView> 
             std::shared_ptr<ImageProcessor> image,
             std::shared_ptr<LoggerFacade> log = nullptr
         );
-    
+            
         void update() override;
     
         void render();

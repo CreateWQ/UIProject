@@ -7,5 +7,7 @@ std::unique_ptr<UserView> UIFactory::createUserView(
     std::shared_ptr<ImageProcessor> image_processor,
     std::shared_ptr<LoggerFacade> logger
 ) {
-    return std::make_unique<UserView>(model, file_manager, theme_manager, image_processor, logger);
+    auto view = std::make_unique<UserView>(model, file_manager, theme_manager, image_processor, logger);
+
+    return view;
 }

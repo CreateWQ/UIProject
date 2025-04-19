@@ -3,7 +3,7 @@
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <stdexcept>
 
-LoggerFacade::LoggerFacade(const std::string& logger_name){
+LoggerFacade::LoggerFacade(const std::string& logger_name) {
     try {
         // 創建控制台和檔案日誌輸出
         auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
@@ -23,6 +23,7 @@ LoggerFacade::LoggerFacade(const std::string& logger_name){
 
         spdlog::register_logger(logger);
         SPDLOG_LOGGER_INFO(logger, "Logger initialized successfully");
+        log_buffers.reserve(MAX_LOGS);
 
     } catch (const spdlog::spdlog_ex& ex) {
         throw std::runtime_error("Logger initialization failed: " + std::string(ex.what()));
